@@ -63,4 +63,8 @@ public class Type2Record extends Record
 		return field_list;
 	}
 
+	public boolean isFieldAvailable(int field_no)
+	{
+		return super.isFieldAvailable(field_no);		
+	}
 }

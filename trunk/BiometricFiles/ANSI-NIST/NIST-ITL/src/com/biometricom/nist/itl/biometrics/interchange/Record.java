@@ -38,25 +38,30 @@ public abstract class Record
 	
 	public Record(int record_type, String description)
 	{
-		setRecordType(record_type, description);
+		setType(record_type, description);
 	}
 	
 	public Record(int record_type, String description, int idc)
 	{
-		setRecordType(record_type, description, idc);
+		setType(record_type, description, idc);
 	}
 
-	public void setRecordType(int record_type, String description)
+	public void setType(int record_type, String description)
 	{
 		m_record_type = record_type;
 		m_description = description;
 	}
 	
-	public void setRecordType(int record_type, String description, int idc)
+	public void setType(int record_type, String description, int idc)
 	{
 		m_record_type = record_type;
 		m_description = description;
 		m_idc = idc;
+	}
+	
+	public int getType()
+	{
+		return m_record_type;
 	}
 	
 	public void setIdc(int idc)

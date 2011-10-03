@@ -16,6 +16,7 @@
 package com.biometricom.nist.itl.biometrics.interchange;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.Collections;
@@ -32,28 +33,56 @@ import java.util.Collections;
  * 
  *
  */
-public class Transaction
+public abstract class Transaction
 {
+	public final static int STD_VERSION_2000 = 0;
+	public final static int STD_VERSION_2007 = 1;
+	public final static int STD_VERSION_2011 = 2;
+	
+	public final static int[] VALID_REC_TYPES = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 98, 99};
+	
 	public Transaction()
 	{		
 	}
 	
-	public Transaction(String tot)
+	public Transaction(TransactionDefinition def) 
 	{
-		m_type1_record.setTypeOfTransaction(tot);
+		setTransactionDefinition(def);
 	}
 	
-	public void setTypeOfTransaction(String tot)
+	public void setTransactionDefinition(TransactionDefinition def)
 	{
-		m_type1_record.setTypeOfTransaction(tot);
+		m_def = def;
+		
+		try
+		{
+			Type1Record rec = null;
+			
+			List<Record> rec_list = getRecords(1);
+			if (rec_list == null || rec_list.size() == 0)
+			{
+				rec = new Type1Record();
+				addRecord(rec);				
+			}
+			else
+			{
+				rec = (Type1Record)rec_list.get(1);
+			}
+			rec.setTypeOfTransaction(def.getTypeOfTransaction());
+		}
+		catch (Exception ex)
+		{
+			ex.printStackTrace();
+		}
+
 	}
 	
-	public String getTypeOfTransaction()
+	public TransactionDefinition getTransactionDefinition()
 	{
-		return m_type1_record.getTypeOfTransaction();
+		return m_def;
 	}
 	
-	public void addRecord(Type2Record rec) throws Exception
+	/*public void addRecord(Type2Record rec) throws Exception
 	{
 		m_type2_records.add(rec);
 	}
@@ -66,6 +95,39 @@ public class Transaction
 	public List<Type2Record> getType2Records()
 	{
 		return m_type2_records;
+	}*/
+	
+	public void addRecord(Record rec) throws Exception
+	{
+		Integer key = new Integer(rec.getType());
+		List<Record> rec_list = m_records.get(key);
+		if (rec_list == null)
+		{
+			rec_list = new ArrayList<Record>();
+		}
+		else
+		{
+			// quick check to see if we're trying to add beyond the limit of the rec type
+			int max_recs = getMaxRecordsForType(rec.getType());
+			if (rec_list.size() >= max_recs)
+			{
+				throw new Exception("Transaction of type [" + m_def.getTypeOfTransaction() + "] can only have " + max_recs + " of type " + rec.getType() + " records.");
+			}
+		}
+		if (rec_list.contains(rec) == false)
+		{
+			rec_list.add(rec);
+			m_records.put(key, rec_list);			
+		}
+	}
+	
+	
+	public abstract int getMaxRecordsForType(int type);
+	
+	
+	public List<Record> getRecords(int type)
+	{
+		return m_records.get(new Integer(type));
 	}
 	
 	public void setIdcForAllRecords()
@@ -75,15 +137,28 @@ public class Transaction
 		ArrayList<Type1Record.RecordContent> record_content = new ArrayList<Type1Record.RecordContent>(); 
 		int idc = 0;
 		
+		//get the type 1 record as we will need to update the record content
+		List<Record> rec_list = getRecords(1);
+		Type1Record type1_rec = (Type1Record)rec_list.get(0);
+		
 		// no idc for type 1, so start with 2 and go through all the recs
-		for (Record rec : m_type2_records)
+		for (int i=1; i<VALID_REC_TYPES.length; i++)
 		{
-			rec.setIdc(idc);
-			record_content.add(m_type1_record.new RecordContent(2, idc));
-			idc++;
+			rec_list = getRecords(VALID_REC_TYPES[i]);
+			if (rec_list != null)
+			{
+				for (Record rec : rec_list)
+				{
+					rec.setIdc(idc);
+					record_content.add(type1_rec.new RecordContent(rec.getType(), idc));
+					idc++;
+				}
+			}
+			
+			
 		}
 		
-		m_type1_record.setRecordContent(record_content);
+		type1_rec.setRecordContent(record_content);
 	}
 	
 	
@@ -95,6 +170,35 @@ public class Transaction
 		return is_valid;
 	}
 	
-	private Type1Record 		m_type1_record = new Type1Record();
-	private List<Type2Record>	m_type2_records = new ArrayList<Type2Record>();
+	public boolean equals(Object t)
+	{
+		try
+		{
+			if (t instanceof Transaction)
+			{
+				Transaction trans = (Transaction)t;
+				if (trans.getTransactionDefinition().getName().equals(m_def.getName()) && 
+						trans.getTransactionDefinition().getVersion().equals(m_def.getVersion()) && 
+						trans.getTransactionDefinition().getTypeOfTransaction().equals(m_def.getTypeOfTransaction()))
+				{
+					return true;
+				}
+			}
+		}
+		catch (Exception ex)
+		{
+			// fall through to false
+		}
+		return false;
+	}
+	
+	private TransactionDefinition	m_def = null;
+	//private String				m_name = new String();
+	//private String				m_version = new String();
+	//private String				m_tot = new String();
+	//private int					m_std_version = 0;
+	
+	//private Type1Record 		m_type1_record = new Type1Record();
+	//private List<Type2Record>	m_type2_records = new ArrayList<Type2Record>();
+	private HashMap<Integer, List<Record>>	m_records = new HashMap<Integer, List<Record>>();
 }

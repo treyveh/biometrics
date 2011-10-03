@@ -23,6 +23,7 @@ import java.io.OutputStream;
 import java.util.List;
 
 import com.biometricom.nist.itl.biometrics.interchange.*;
+import com.biometricom.nist.itl.biometrics.interchange.Type1Record.RecordContent;
 
 /** 
  * 
@@ -67,8 +68,18 @@ public class TraditionalEncodingOutputStream extends FilterOutputStream
 		// first we need to set all of the IDC values for the records
 		trans.setIdcForAllRecords();
 		
-		write(trans.getType1Record());
-		//write(trans.getType2Records());
+		for (int i=1; i<Transaction.VALID_REC_TYPES.length; i++)
+		{
+			List<Record> rec_list = trans.getRecords(Transaction.VALID_REC_TYPES[i]);
+			if (rec_list != null)
+			{
+				for (Record rec : rec_list)
+				{
+					write(rec);
+				}
+			}		
+		}
+
 	}
 	
 	

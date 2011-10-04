@@ -36,17 +36,32 @@ public class TransactionDefinition
 		
 	}
 	
-	public TransactionDefinition(String name, String version, String tot, int std_version) 
+	public TransactionDefinition(String name, String version, String tot) 
 	{
-		m_name = name;
-		m_version = version;		
-				
-		// need to add the type 1 rec before setting tot on rec1
+		setName(name);
+		setVersion(version);		
 		setTypeOfTransaction(tot);
-		
-		m_std_version = std_version;
 	}
 	
+	public TransactionDefinition(String name, String version, String tot, int std_version) throws Exception 
+	{
+		setName(name);
+		setVersion(version);		
+		setTypeOfTransaction(tot);
+		
+		setStandardVersion(std_version);
+	}
+
+	public TransactionDefinition(String name, String version, String tot, int std_version, String class_name) throws Exception 
+	{
+		setName(name);
+		setVersion(version);		
+		setTypeOfTransaction(tot);
+		
+		setStandardVersion(std_version);
+		setClassName(class_name);
+	}
+
 	public void setName(String name)
 	{
 		m_name = name;
@@ -93,9 +108,41 @@ public class TransactionDefinition
 	{
 		return m_std_version;
 	}
+	
+	public void setClassName(String class_name)
+	{
+		m_class_name = class_name;
+	}
+	
+	public String getClassName()
+	{
+		return m_class_name;
+	}
+	
+	public boolean equals(Object obj)
+	{
+		try
+		{
+			if (obj instanceof TransactionDefinition)
+			{
+				TransactionDefinition def = (TransactionDefinition)obj;
+				if (def.getName().equals(m_name) && def.getVersion().equals(m_version) && def.getTypeOfTransaction().equals(m_tot))
+				{
+					return true;
+				}
+			}
+		}
+		catch (Exception ex)
+		{
+			// fall through to false
+		}
+		return false;
+	}
+	
 	private String				m_name = new String();
 	private String				m_version = new String();
 	private String				m_tot = new String();
 	private int					m_std_version = 0;
+	private String				m_class_name = new String();
 
 }

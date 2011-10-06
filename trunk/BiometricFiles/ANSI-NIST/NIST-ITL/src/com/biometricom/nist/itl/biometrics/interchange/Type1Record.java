@@ -271,6 +271,7 @@ public class Type1Record extends Record
 	{
 		switch (field_no)
 		{
+			// all manditory fields must be available.  They may not be valid, but that is a different check
 			case 2: 
 			case 3:	
 			case 4: 
@@ -354,7 +355,7 @@ public class Type1Record extends Record
 		switch (field_no)
 		{
 			case 2: 
-				f = new Field(1, field_no, "Version Numbder", "VER");
+				f = new Field(getType(), field_no, "Version Numbder", "VER");
 				f.setInformationField(new InformationField(m_version));
 				return f;
 				
@@ -362,55 +363,55 @@ public class Type1Record extends Record
 				return getTransactionContentField();
 				
 			case 4: 
-				f = new Field(1, field_no, "Type of Transaction", "TOT");
+				f = new Field(getType(), field_no, "Type of Transaction", "TOT");
 				f.setInformationField(new InformationField(m_type_of_transaction));
 				return f;
 				
 			case 5: 
-				f = new Field(1, field_no, "Date", "DAT");
+				f = new Field(getType(), field_no, "Date", "DAT");
 				String date = String.format("%1$tY%1$tm%1$td", m_date_of_transaction);
 				f.setInformationField(new InformationField(date));
 				return f;
 
 			case 6:				
-				f = new Field(1, field_no, "Priority", "PRY");
+				f = new Field(getType(), field_no, "Priority", "PRY");
 				f.setInformationField(Integer.toString(m_priority));
 				return f;
 				
 			case 7: 
-				f = new Field(1, field_no, "Destination Agency Identifier", "DAI");
+				f = new Field(getType(), field_no, "Destination Agency Identifier", "DAI");
 				f.setInformationField(new InformationField(m_destination_agency_identifier));
 				return f;
 				
 			case 8: 
-				f = new Field(1, field_no, "Originating Agency Identifier", "ORI");
+				f = new Field(getType(), field_no, "Originating Agency Identifier", "ORI");
 				f.setInformationField(new InformationField(m_originating_agency_identifier));
 				return f;
 				
 			case 9: 
-				f = new Field(1, field_no, "Transaction Control Number", "TCN");
+				f = new Field(getType(), field_no, "Transaction Control Number", "TCN");
 				f.setInformationField(new InformationField(m_transaction_control_number));
 				return f;
 				
 			case 10: 
-				f = new Field(1, field_no, "Transaction Control Reference", "TCR");
+				f = new Field(getType(), field_no, "Transaction Control Reference", "TCR");
 				f.setInformationField(new InformationField(m_transaction_control_reference));
 				return f;
 				
 			case 11: 
-				f = new Field(1, field_no, "Native Scanning Resolution", "NSR");
+				f = new Field(getType(), field_no, "Native Scanning Resolution", "NSR");
 				String nsr = String.format("%05.2f", m_native_scanning_resolution);
 				f.setInformationField(new InformationField(nsr));
 				return f;
 
 			case 12: 
-				f = new Field(1, field_no, "Nominal Resolution", "NTR");
+				f = new Field(getType(), field_no, "Nominal Resolution", "NTR");
 				String ntr = String.format("%05.2f", m_nominal_resolution);
 				f.setInformationField(new InformationField(ntr));
 				return f;
 				
 			case 13: 
-				f = new Field(1, field_no, "Domain", "DOM");
+				f = new Field(getType(), field_no, "Domain", "DOM");
 				SubField dom = new SubField();
 				dom.addInformationItem(m_domain.getDomainName());
 				if (m_domain.getDomainVersion() != null && m_domain.getDomainVersion().length() > 0)
@@ -421,13 +422,13 @@ public class Type1Record extends Record
 				return f;
 				
 			case 14: 
-				f = new Field(1, field_no, "Grenwich Mean Time", "GMT");
+				f = new Field(getType(), field_no, "Grenwich Mean Time", "GMT");
 				String gmt = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tSZ", m_gmt);
 				f.setInformationField(new InformationField(gmt));
 				return f;
 				
 			case 15: 
-				f = new Field(1, field_no, "Character Encoding", "DCS");
+				f = new Field(getType(), field_no, "Character Encoding", "DCS");
 				
 				for (CharacterEncoding enc : m_character_encoding)
 				{
@@ -444,7 +445,7 @@ public class Type1Record extends Record
 				return f;
 				
 			case 16: 
-				f = new Field(1, field_no, "Application Profile Specifications", "APS");
+				f = new Field(getType(), field_no, "Application Profile Specifications", "APS");
 				
 				for (ApplicationProfileSpecification aps : m_application_profile_specs)
 				{
@@ -458,7 +459,7 @@ public class Type1Record extends Record
 				return f;
 			
 			case 17: 
-				f = new Field(1, field_no, "Agency Names", "ANM");
+				f = new Field(getType(), field_no, "Agency Names", "ANM");
 				
 				SubField anm = new SubField();
 				anm.addInformationItem(m_destination_agency_name);
@@ -474,7 +475,7 @@ public class Type1Record extends Record
 	
 	private Field getTransactionContentField()
 	{
-		Field f = new Field(1, 3, "Transaction Content", "CNT");
+		Field f = new Field(getType(), 3, "Transaction Content", "CNT");
 		SubField frc = new SubField();
 		frc.addInformationItem("1");
 		frc.addInformationItem(Integer.toString(m_record_content.size()));

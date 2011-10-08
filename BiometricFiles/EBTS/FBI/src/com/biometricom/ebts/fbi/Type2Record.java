@@ -18,6 +18,7 @@ package com.biometricom.ebts.fbi;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import com.biometricom.nist.itl.biometrics.interchange.Field;
 import com.biometricom.nist.itl.biometrics.interchange.InformationField;
@@ -616,6 +617,885 @@ public class Type2Record extends com.biometricom.nist.itl.biometrics.interchange
 		}
 	}
 	
+	public void setFbiFileNumber(String value)
+	{
+		m_fbi_file_number = value;
+	}
+	
+	public String getFbiFileNumber()
+	{
+		return m_fbi_file_number;
+	}
+	
+	public void setQueryDepthOfDetail(String value)
+	{
+		m_query_depth_of_detail = value;
+	}
+	
+	public String getQueryDepthOfDetail()
+	{
+		return m_query_depth_of_detail;
+	}
+	
+	public void setAttentionIndicator(String value)
+	{
+		m_attention_indicator = value;
+	}
+	
+	public String getAttentionIndicator()
+	{
+		return m_attention_indicator;
+	}
+	
+	public void setOriginatingAgencyCaseNumber(String value)
+	{
+		m_originating_agency_case_number = value;
+	}
+	
+	public String getOriginatingAgencyCaseNumber()
+	{
+		return m_originating_agency_case_number;
+	}
+	
+	public void setFbiLatentCaseNumber(String value)
+	{
+		m_fbi_latent_case_number = value;
+	}
+	
+	public String getFbiLatentCaseNumber()
+	{
+		return m_fbi_latent_case_number;
+	}
+	
+	public void setFbiLatentCaseExtension(String value)
+	{
+		m_fbi_latent_case_extension = value;
+	}
+	
+	public String getFbiLatentCaseExtension()
+	{
+		return m_fbi_latent_case_extension;
+	}
+	
+	public void setFbiNumber(String value)
+	{
+		m_fbi_number = value;
+	}
+	
+	public String getFbiNumber()
+	{
+		return m_fbi_number;
+	}
+	
+	public void setStateIdNumber(String value)
+	{
+		m_state_id_number = value;
+	}
+	
+	public String getStateIdNumber()
+	{
+		return m_state_id_number;
+	}
+	
+	public void setMiscIdNumber(String value)
+	{
+		m_misc_id_number = value;
+	}
+	
+	public String getMiscIdNumber()
+	{
+		return m_misc_id_number;
+	}
+	
+	public void setName(String value)
+	{
+		m_name = value;
+	}
+	
+	public String getName()
+	{
+		return m_name;
+	}
+	
+	public void setPlaceOfBirth(String value)
+	{
+		m_place_of_birth = value;
+	}
+	
+	public String getPlaceOfBirth()
+	{
+		return m_place_of_birth;
+	}
+	
+	public void setCountryOfCitizenship(String value)
+	{
+		m_country_of_citizenship = value;
+	}
+	
+	public String getCountryOfCitizenship()
+	{
+		return m_country_of_citizenship;
+	}
+	
+	public void setSex(String value)
+	{
+		m_sex = value;
+	}
+	
+	public String getSex()
+	{
+		return m_sex;
+	}
+	
+	public void setRace(String value)
+	{
+		m_race = value;
+	}
+	
+	public String getRace()
+	{
+		return m_race;
+	}
+	
+	public void setEyeColor(String value)
+	{
+		m_eye_color = value;
+	}
+	
+	public String getEyeColor()
+	{
+		return m_eye_color;
+	}
+	
+	public void setHairColor(String value)
+	{
+		m_hair_color = value;
+	}
+	
+	public String getHairColor()
+	{
+		return m_hair_color;
+	}
+	
+	public void setNcicFingerprintClass(String value)
+	{
+		m_ncic_fingerprint_class = value;
+	}
+	
+	public String getNcicFingerprintClass()
+	{
+		return m_ncic_fingerprint_class;
+	}
+	
+	public void setReasonFingerprinted(String value)
+	{
+		m_reason_fingerprinted = value;
+	}
+	
+	public String getReasonFingerprinted()
+	{
+		return m_reason_fingerprinted;
+	}
+	
+	public void setEmployerAddress(String value)
+	{
+		m_employer_address = value;
+	}
+	
+	public String getEmployerAddress()
+	{
+		return m_employer_address;
+	}
+	
+	public void setOccupation(String value)
+	{
+		m_occupation = value;
+	}
+	
+	public String getOccupation()
+	{
+		return m_occupation;
+	}
+	
+	public void setPersonFingerprintedAddress(String value)
+	{
+		m_person_fingerprinted_address = value;
+	}
+	
+	public String getPersonFingerprintedAddress()
+	{
+		return m_person_fingerprinted_address;
+	}
+	
+	public void setMilitaryCode(String value)
+	{
+		m_military_code = value;
+	}
+	
+	public String getMilitaryCode()
+	{
+		return m_military_code;
+	}
+	
+	public void setTypeOfSearchRequested(String value)
+	{
+		m_type_of_search_requested = value;
+	}
+	
+	public String getTypeOfSearchRequested()
+	{
+		return m_type_of_search_requested;
+	}
+	
+	public void setGeographicAreaOfSearch(String value)
+	{
+		m_geo_area_of_search = value;
+	}
+	
+	public String getGeographicAreaOfSearch()
+	{
+		return m_geo_area_of_search;
+	}
+	
+	public void setDateOfArrestSuffix(String value)
+	{
+		m_date_of_arrest_suffix = value;
+	}
+	
+	public String getDateOfArrestSuffix()
+	{
+		return m_date_of_arrest_suffix;
+	}
+	
+	public void setCustodyOrSupervisoryStatus(String value)
+	{
+		m_custody_or_supervisory_status = value;
+	}
+	
+	public String getCustodyOrSupervisoryStatus()
+	{
+		return m_custody_or_supervisory_status;
+	}
+	
+	public void setIdentificationComments(String value)
+	{
+		m_identification_comments = value;
+	}
+	
+	public String getIdentificationComments()
+	{
+		return m_identification_comments;
+	}
+	
+	public void setSearchResultsFindingsCode(String value)
+	{
+		m_search_results_findings_code = value;
+	}
+	
+	public String getSearchResultsFindingsCode()
+	{
+		return m_search_results_findings_code;
+	}
+	
+	public void setCaseTitle(String value)
+	{
+		m_case_title = value;
+	}
+	
+	public String getCaseTitle()
+	{
+		return m_case_title;
+	}
+	
+	public void setPersonTypeDesignator(String value)
+	{
+		m_person_type_designator = value;
+	}
+	
+	public String getPersonTypeDesignator()
+	{
+		return m_person_type_designator;
+	}
+	
+	public void setRepositoryStatisticsResponse(String value)
+	{
+		m_repository_statistics_response = value;
+	}
+	
+	public String getRepositoryStatisticsResponse()
+	{
+		return m_repository_statistics_response;
+	}
+	
+	public void setResponseExplanation(String value)
+	{
+		m_response_explanation = value;
+	}
+	
+	public String getResponseExplanation()
+	{
+		return m_response_explanation;
+	}
+	
+	public void setUniversalControlNumber(String value)
+	{
+		m_universal_control_number = value;
+	}
+	
+	public String getUniversalControlNumber()
+	{
+		return m_universal_control_number;
+	}
+	
+	public void setCivilRecordNumber(String value)
+	{
+		m_civil_record_number = value;
+	}
+	
+	public String getCivilRecordNumber()
+	{
+		return m_civil_record_number;
+	}
+	
+	public void setNoteField(String value)
+	{
+		m_note_field = value;
+	}
+	
+	public String getNoteField()
+	{
+		return m_note_field;
+	}
+	
+	public void setCourtCaseNumber(String value)
+	{
+		m_court_case_number = value;
+	}
+	
+	public String getCourtCaseNumber()
+	{
+		return m_court_case_number;
+	}
+	
+	public void setStateArrestNumber(String value)
+	{
+		m_state_arrest_number = value;
+	}
+	
+	public String getStateArrestNumber()
+	{
+		return m_state_arrest_number;
+	}
+	
+	public void setName1(String value)
+	{
+		m_name1 = value;
+	}
+	
+	public String getName1()
+	{
+		return m_name1;
+	}
+	
+	public void setName2(String value)
+	{
+		m_name2 = value;
+	}
+	
+	public String getName2()
+	{
+		return m_name2;
+	}
+	
+	public void setName3(String value)
+	{
+		m_name3 = value;
+	}
+	
+	public String getName3()
+	{
+		return m_name3;
+	}
+	public void setName4(String value)
+	{
+		m_name4 = value;
+	}
+	
+	public String getName4()
+	{
+		return m_name4;
+	}
+
+	public void setName5(String value)
+	{
+		m_name5 = value;
+	}
+	
+	public String getName5()
+	{
+		return m_name5;
+	}
+
+	public void setCascadedSearchFlag(String value)
+	{
+		m_cascaded_search_flag = value;
+	}
+	
+	public String getCascadedSearchFlag()
+	{
+		return m_cascaded_search_flag;
+	}
+
+	public void setSubmittedName(String value)
+	{
+		m_submitted_name = value;
+	}
+	
+	public String getSubmittedName()
+	{
+		return m_submitted_name;
+	}
+
+	public void setRapBackVerificationStatus(String value)
+	{
+		m_rap_back_verification_status = value;
+	}
+	
+	public String getRapBackVerificationStatus()
+	{
+		return m_rap_back_verification_status;
+	}
+	
+	public void setDispositionMaintenanceIndicator(String value)
+	{
+		m_disposition_maintenance_indicator = value;
+	}
+	
+	public String getDispositionMaintenanceIndicator()
+	{
+		return m_disposition_maintenance_indicator;
+	}
+	
+	public void setDnaLocation(String value)
+	{
+		m_dna_location = value;
+	}
+	
+	public String getDnaLocation()
+	{
+		return m_dna_location;
+	}
+
+	public void setIdentificationFirearmSales(String value)
+	{
+		m_identification_firearm_sales = value;
+	}
+	
+	public String getIdentificationFirearmSales()
+	{
+		return m_identification_firearm_sales;
+	}
+	
+	public void setContributorAssignedIdNumber(String value)
+	{
+		m_contributor_assigned_id_no = value;
+	}
+	
+	public String getContributorAssignedIdNumber()
+	{
+		return m_contributor_assigned_id_no;
+	}
+	
+	public void setSupplementaryIdInfo(String value)
+	{
+		m_supplementary_id_info = value;
+	}
+	
+	public String getSupplementaryIdInfo()
+	{
+		return m_supplementary_id_info;
+	}
+
+	public void setHitTypeIndicator(String value)
+	{
+		m_hit_type_indc = value;
+	}
+	
+	public String getHitTypeIndicator()
+	{
+		return m_hit_type_indc;
+	}
+
+	public void setGeographicCoordinateDatum(String value)
+	{
+		m_geo_coordinate_datum = value;
+	}
+	
+	public String getGeographicCoordinateDatum()
+	{
+		return m_geo_coordinate_datum;
+	}
+
+	public void addSendCopyTo(String value)
+	{
+		m_send_copy_to.add(value);
+	}
+	
+	public void setSendCopyToList(List<String> list)
+	{
+		m_send_copy_to = new ArrayList<String>(list);
+	}
+	
+	public List<String> getSendCopyToList()
+	{
+		return m_send_copy_to;
+	}
+
+	public void addContributorCaseIdentifier(ContributorCaseIdentifier value)
+	{
+		m_contributor_case_identifier.add(value);
+	}
+	
+	public void setContributorCaseIdentifierList(List<ContributorCaseIdentifier> list)
+	{
+		m_contributor_case_identifier = new ArrayList<ContributorCaseIdentifier>(list);
+	}
+	
+	public List<ContributorCaseIdentifier> getContributorCaseIdentifierList()
+	{
+		return m_contributor_case_identifier;
+	}
+
+	public void addSocialSecurityNumber(String value)
+	{
+		m_ssn.add(value);
+	}
+	
+	public void setSocialSecurityNumberList(List<String> list)
+	{
+		m_ssn = new ArrayList<String>(list);
+	}
+	
+	public List<String> getSocialSecurityNumberList()
+	{
+		return m_ssn;
+	}
+
+	public void addAliases(String value)
+	{
+		m_aliases.add(value);
+	}
+	
+	public void setAliasesList(List<String> list)
+	{
+		m_aliases = new ArrayList<String>(list);
+	}
+	
+	public List<String> getAliasesList()
+	{
+		return m_aliases;
+	}
+
+	public void addScarsMarksTattoos(String value)
+	{
+		m_scars_marks_tattoos.add(value);
+	}
+	
+	public void setScarsMarksTattoosList(List<String> list)
+	{
+		m_scars_marks_tattoos = new ArrayList<String>(list);
+	}
+	
+	public List<String> getScarsMarksTattoosList()
+	{
+		return m_scars_marks_tattoos;
+	}
+
+	public void addFingerprintPattern(FingerprintPattern value)
+	{
+		m_fingerprint_pattern.add(value);
+	}
+	
+	public void setFingerprintPatternList(List<FingerprintPattern> list)
+	{
+		m_fingerprint_pattern = new ArrayList<FingerprintPattern>(list);
+	}
+	
+	public List<FingerprintPattern> getFingerprintPatternList()
+	{
+		return m_fingerprint_pattern;
+	}
+
+	public void addArrestSegmentLiteral(ArrestSegmentLiteral value)
+	{
+		m_arrest_info.add(value);
+	}
+	
+	public void setArrestSegmentLiteralList(List<ArrestSegmentLiteral> list)
+	{
+		m_arrest_info = new ArrayList<ArrestSegmentLiteral>(list);
+	}
+	
+	public List<ArrestSegmentLiteral> getArrestSegmentLiteralList()
+	{
+		return m_arrest_info;
+	}
+	
+	public void addCourtSegmentLiteral(CourtSegmentLiteral value)
+	{
+		m_court_info.add(value);
+	}
+	
+	public void setCourtSegmentLiteralList(List<CourtSegmentLiteral> list)
+	{
+		m_court_info = new ArrayList<CourtSegmentLiteral>(list);
+	}
+	
+	public List<CourtSegmentLiteral> getCourtSegmentLiteralList()
+	{
+		return m_court_info;
+	}
+	
+	public void addFingerNumbersRequested(Integer value)
+	{
+		m_finger_numbers_requested.add(value);
+	}
+	
+	public void setFingerNumbersRequestedList(List<Integer> list)
+	{
+		m_finger_numbers_requested = new ArrayList<Integer>(list);
+	}
+	
+	public List<Integer> getFingerNumbersRequestedList()
+	{
+		return m_finger_numbers_requested;
+	}
+
+	public void addMessage(String value)
+	{
+		m_status_or_error_message.add(value);
+	}
+	
+	public void setMessageList(List<String> list)
+	{
+		m_status_or_error_message = new ArrayList<String>(list);
+	}
+	
+	public List<String> getMessageList()
+	{
+		return m_status_or_error_message;
+	}
+
+	public void addImageType(Integer value)
+	{
+		m_image_type.add(value);
+	}
+	
+	public void setImageTypeList(List<Integer> list)
+	{
+		m_image_type = new ArrayList<Integer>(list);
+	}
+	
+	public List<Integer> getImageTypeList()
+	{
+		return m_image_type;
+	}
+
+	public void addCandidate(Candidate value)
+	{
+		m_candidate_list.add(value);
+	}
+	
+	public void setCandidateList(List<Candidate> list)
+	{
+		m_candidate_list = new ArrayList<Candidate>(list);
+	}
+	
+	public List<Candidate> getCandidateList()
+	{
+		return m_candidate_list;
+	}
+
+	public void addImageCaptureEquipment(ImageCaptureEquipment value)
+	{
+		m_capture_equipment.add(value);
+	}
+	
+	public void setImageCaptureEquipmentList(List<ImageCaptureEquipment> list)
+	{
+		m_capture_equipment = new ArrayList<ImageCaptureEquipment>(list);
+	}
+	
+	public List<ImageCaptureEquipment> getImageCaptureEquipmentList()
+	{
+		return m_capture_equipment;
+	}
+	
+	public void addFingerprintsUpdated(String value)
+	{
+		m_fingerprints_updated.add(value);
+	}
+	
+	public void setFingerprintsUpdatedList(List<String> list)
+	{
+		m_fingerprints_updated = new ArrayList<String>(list);
+	}
+	
+	public List<String> getFingerprintsUpdatedList()
+	{
+		return m_fingerprints_updated;
+	}
+
+	public void addControllingAgencyIdentifier(String value)
+	{
+		m_controlling_agency_identifier.add(value);
+	}
+	
+	public void setControllingAgencyIdentifierList(List<String> list)
+	{
+		m_controlling_agency_identifier = new ArrayList<String>(list);
+	}
+	
+	public List<String> getControllingAgencyIdentifierList()
+	{
+		return m_controlling_agency_identifier;
+	}
+
+	public void addFingerPosition(Integer value)
+	{
+		m_finger_position.add(value);
+	}
+	
+	public void setFingerPositionList(List<Integer> list)
+	{
+		m_finger_position = new ArrayList<Integer>(list);
+	}
+	
+	public List<Integer> getFingerPositionList()
+	{
+		return m_finger_position;
+	}
+
+	public void addAmputatedOrBandaged(AmputatedOrBandaged value)
+	{
+		m_amputated_or_bandaged.add(value);
+	}
+	
+	public void setAmputatedOrBandagedList(List<AmputatedOrBandaged> list)
+	{
+		m_amputated_or_bandaged = new ArrayList<AmputatedOrBandaged>(list);
+	}
+	
+	public List<AmputatedOrBandaged> getAmputatedOrBandagedList()
+	{
+		return m_amputated_or_bandaged;
+	}
+
+	public void addAfisSegmentControlNumber(Integer value)
+	{
+		m_afis_segment_control_number.add(value);
+	}
+	
+	public void setAfisSegmentControlNumberList(List<Integer> list)
+	{
+		m_afis_segment_control_number = new ArrayList<Integer>(list);
+	}
+	
+	public List<Integer> getAfisSegmentControlNumberList()
+	{
+		return m_afis_segment_control_number;
+	}
+
+	public void addMatchScore(Integer value)
+	{
+		m_match_score.add(value);
+	}
+	
+	public void setMatchScoreList(List<Integer> list)
+	{
+		m_match_score = new ArrayList<Integer>(list);
+	}
+	
+	public List<Integer> getMatchScoreList()
+	{
+		return m_match_score;
+	}
+
+	public void addRidgeCoreDeltaOneForSubpatternClassification(RidgeCoreDelta value)
+	{
+		m_ridge_core_delta_one_for_subpattern_classification.add(value);
+	}
+	
+	public void setRidgeCoreDeltaOneForSubpatternClassificationList(List<RidgeCoreDelta> list)
+	{
+		m_ridge_core_delta_one_for_subpattern_classification = new ArrayList<RidgeCoreDelta>(list);
+	}
+	
+	public List<RidgeCoreDelta> getRidgeCoreDeltaOneForSubpatternClassificationList()
+	{
+		return m_ridge_core_delta_one_for_subpattern_classification;
+	}
+
+	public void addRidgeCoreDeltaTwoForSubpatternClassification(RidgeCoreDelta value)
+	{
+		m_ridge_core_delta_two_for_subpattern_classification.add(value);
+	}
+	
+	public void setRidgeCoreDeltaTwoForSubpatternClassificationList(List<RidgeCoreDelta> list)
+	{
+		m_ridge_core_delta_two_for_subpattern_classification = new ArrayList<RidgeCoreDelta>(list);
+	}
+	
+	public List<RidgeCoreDelta> getRidgeCoreDeltaTwoForSubpatternClassificationList()
+	{
+		return m_ridge_core_delta_two_for_subpattern_classification;
+	}
+
+	public void addSpecialPopulationCognizantFileNumber(String value)
+	{
+		m_special_population_cognizant_file_number.add(value);
+	}
+	
+	public void setSpecialPopulationCognizantFileNumberList(List<String> list)
+	{
+		m_special_population_cognizant_file_number = new ArrayList<String>(list);
+	}
+	
+	public List<String> getSpecialPopulationCognizantFileNumberList()
+	{
+		return m_special_population_cognizant_file_number;
+	}
+
+	public void addNameOfDesignatedRepository(String value)
+	{
+		m_name_of_designated_repository.add(value);
+	}
+	
+	public void setNameOfDesignatedRepositoryList(List<String> list)
+	{
+		m_name_of_designated_repository = new ArrayList<String>(list);
+	}
+	
+	public List<String> getNameOfDesignatedRepositoryList()
+	{
+		return m_name_of_designated_repository;
+	}
+
+	public void addRapBackRecipient(String value)
+	{
+		m_rap_back_recipient.add(value);
+	}
+	
+	public void setRapBackRecipientList(List<String> list)
+	{
+		m_rap_back_recipient = new ArrayList<String>(list);
+	}
+	
+	public List<String> getRapBackRecipientList()
+	{
+		return m_rap_back_recipient;
+	}
+
 	private String m_fbi_file_number = new String();
 	private ArrayList<String>	m_send_copy_to = new ArrayList<String>();
 	private String m_query_depth_of_detail = new String();
@@ -669,7 +1549,7 @@ public class Type2Record extends com.biometricom.nist.itl.biometrics.interchange
 	private int		m_offense_category = -1;
 	private GregorianCalendar m_custody_or_supervisory_start_date = null;
 	private String	m_custody_or_supervisory_status = null;
-	private String	m_identifidation_comments = null;
+	private String	m_identification_comments = null;
 	private	ArrayList<Integer>	m_finger_numbers_requested = new ArrayList<Integer>();
 	private String	m_search_results_findings_code = new String();
 	private ArrayList<String>	m_status_or_error_message = new ArrayList<String>();

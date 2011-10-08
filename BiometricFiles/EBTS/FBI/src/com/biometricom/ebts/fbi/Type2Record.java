@@ -867,6 +867,16 @@ public class Type2Record extends com.biometricom.nist.itl.biometrics.interchange
 		return m_date_of_arrest_suffix;
 	}
 	
+	public void setEmployeeIdNumber(String value)
+	{
+		m_employee_id_number = value;
+	}
+	
+	public String getEmployeeIdNumber()
+	{
+		return m_employee_id_number;
+	}
+	
 	public void setCustodyOrSupervisoryStatus(String value)
 	{
 		m_custody_or_supervisory_status = value;
@@ -1495,6 +1505,509 @@ public class Type2Record extends com.biometricom.nist.itl.biometrics.interchange
 	{
 		return m_rap_back_recipient;
 	}
+	
+	public void setPalmPrintAvailable(boolean value)
+	{
+		m_is_palm_print_available = new Boolean(value);
+	}
+	
+	public boolean isPalmPrintAvailable()
+	{
+		if (m_is_palm_print_available == null)
+		{
+			return false;
+		}
+		return m_is_palm_print_available.booleanValue();
+	}
+
+	public void setPhotoAvailable(boolean value)
+	{
+		m_is_photo_available = new Boolean(value);
+	}
+	
+	public boolean isPhotoAvailable()
+	{
+		if (m_is_photo_available == null)
+		{
+			return false;
+		}
+		return m_is_photo_available.booleanValue();
+	}
+
+	public void setRetentionCode(boolean value)
+	{
+		m_retention_code = value;
+	}
+	
+	public boolean getRetentionCode()
+	{
+		return m_retention_code;
+	}
+
+	public void setCivilSearchRequested(boolean value)
+	{
+		m_is_civil_search_requested = new Boolean(value);
+	}
+	
+	public boolean isCivilSearchRequested()
+	{
+		if (m_is_civil_search_requested == null)
+		{
+			return false;
+		}
+		return m_is_civil_search_requested.booleanValue();
+	}
+
+	public void setRequestForElectronicRapSheet(boolean value)
+	{
+		m_request_for_electronic_rap_sheet = new Boolean(value);
+	}
+	
+	public boolean isRequestForElectronicRapSheet()
+	{
+		if (m_request_for_electronic_rap_sheet == null)
+		{
+			return false;
+		}
+		return m_request_for_electronic_rap_sheet.booleanValue();
+	}
+
+	public void setResponse(boolean value)
+	{
+		m_is_response = value;
+	}
+	
+	public boolean isResponse()
+	{
+		return m_is_response;
+	}
+
+	public void setUnsolvedLatentFile(boolean value)
+	{
+		m_is_unsolved_latent_file = new Boolean(value);
+	}
+	
+	public boolean isUnsolvedLatentFile()
+	{
+		if (m_is_unsolved_latent_file == null)
+		{
+			return false;
+		}
+		return m_is_unsolved_latent_file.booleanValue();
+	}
+
+	public void setTreatAsAdult(boolean value)
+	{
+		m_treat_as_adult = new Boolean(value);
+	}
+	
+	public boolean isTreatAsAdult()
+	{
+		if (m_treat_as_adult == null)
+		{
+			return false;
+		}
+		return m_treat_as_adult.booleanValue();
+	}
+
+	public void setRequestFeatures(boolean value)
+	{
+		m_request_features = new Boolean(value);
+	}
+	
+	public boolean isRequestFeatures()
+	{
+		if (m_request_features == null)
+		{
+			return false;
+		}
+		return m_request_features.booleanValue();
+	}
+
+	public void setRequestPhoto(boolean value)
+	{
+		m_request_photo = new Boolean(value);
+	}
+	
+	public boolean isRequestPhoto()
+	{
+		if (m_request_photo == null)
+		{
+			return false;
+		}
+		return m_request_photo.booleanValue();
+	}
+	
+	public void setIrisImagesRequested(boolean value)
+	{
+		m_iris_images_requested = new Boolean(value);
+	}
+	
+	public boolean isIrisImagesRequested()
+	{
+		if (m_iris_images_requested == null)
+		{
+			return false;
+		}
+		return m_iris_images_requested.booleanValue();
+	}
+
+	public void setRapBackEligibility(boolean value)
+	{
+		m_rap_back_eligibility = new Boolean(value);
+	}
+	
+	public boolean isRapBackEligible()
+	{
+		if (m_rap_back_eligibility == null)
+		{
+			return false;
+		}
+		return m_rap_back_eligibility.booleanValue();
+	}
+
+	public void setDnaFlag(boolean value)
+	{
+		m_dna_flag = new Boolean(value);
+	}
+	
+	public boolean isDnaFlag()
+	{
+		if (m_dna_flag == null)
+		{
+			return false;
+		}
+		return m_dna_flag.booleanValue();
+	}
+
+	public void setSealArrestFlag(boolean value)
+	{
+		m_seal_arrest_flag = new Boolean(value);
+	}
+	
+	public boolean isSealArrestFlag()
+	{
+		if (m_seal_arrest_flag == null)
+		{
+			return false;
+		}
+		return m_seal_arrest_flag.booleanValue();
+	}
+
+	public void setAgeRange(int low, int high)
+	{
+		m_age_range_low = new Integer(low);
+		m_age_range_hi  = new Integer(high);
+	}
+	
+	public int getAgeRangeLow()
+	{
+		if (m_age_range_low == null)
+		{
+			return 0;
+		}
+		return m_age_range_low.intValue();
+	}
+	
+	public int getAgeRangeHigh()
+	{
+		if (m_age_range_hi == null)
+		{
+			return 0;
+		}
+		return m_age_range_hi.intValue();
+	}
+	
+	public void setDateOfBirth(GregorianCalendar cal)
+	{
+		m_date_of_birth = cal;
+	}
+	
+	public GregorianCalendar getDateOfBirth()
+	{
+		return m_date_of_birth;
+	}
+	
+	public void setHeight(int height, boolean is_inches)
+	{
+		m_height = height;
+		m_height_is_inches = is_inches;
+	}
+
+	public boolean isHeightInches()
+	{
+		return m_height_is_inches;
+	}
+	
+	public int getHeight()
+	{
+		return m_height;
+	}
+	
+	public void setHeightRange(int low, int high)
+	{
+		m_height_range_low = new Integer(low);
+		m_height_range_hi  = new Integer(high);
+	}
+	public int getHeightRangeLow()
+	{
+		if (m_height_range_low == null)
+		{
+			return 0;
+		}
+		return m_height_range_low.intValue();
+	}
+
+	public int getHeightRangeHigh()
+	{
+		if (m_height_range_hi == null)
+		{
+			return 0;
+		}
+		return m_height_range_hi.intValue();
+	}
+
+	public void setWeight(int weight)
+	{
+		m_weight = weight;
+	}
+	
+	public int getWeight()
+	{
+		return m_weight;
+	}
+	
+	public void setWeightRange(int low, int high)
+	{
+		m_weight_range_low = low;
+		m_weight_range_hi  = high;
+	}
+	
+	public int getWeightRangeLow()
+	{
+		if (m_weight_range_low == null)
+		{
+			return 0;
+		}
+		return m_weight_range_low.intValue();
+	}
+
+	public int getWeightRangeHigh()
+	{
+		if (m_weight_range_hi == null)
+		{
+			return 0;
+		}
+		return m_weight_range_hi.intValue();
+	}
+
+	public void setDatePrinted(GregorianCalendar cal)
+	{
+		m_date_printed = cal;
+	}
+	
+	public Calendar getDatePrinted()
+	{
+		return m_date_printed;
+	}
+	
+	public void setDateOfArrest(GregorianCalendar date_of_arrest)
+	{
+		m_date_of_arrest = date_of_arrest;
+	}
+	
+	public Calendar getDateOfArrest()
+	{
+		return m_date_of_arrest;
+	}
+	
+	public void setImageRecordTypeDesired(int value)
+	{
+		m_image_record_type_desired = new Integer(value);
+	}
+	
+	public int getImageRecordTypeDesired()
+	{
+		if (m_image_record_type_desired == null)
+		{
+			return -1;
+		}
+		return m_image_record_type_desired.intValue();
+	}
+	
+	public void setOffenseCategory(int value)
+	{
+		m_offense_category = new Integer(value);
+	}
+	
+	public int getOffenseCategory()
+	{
+		if (m_offense_category == null)
+		{
+			return -1;
+		}
+		return m_offense_category.intValue();
+	}
+	
+	public void setCustodyOrSupervisoryStartDate(GregorianCalendar cal)
+	{
+		m_custody_or_supervisory_start_date = cal;
+	}
+	
+	public Calendar getCustodyOrSupervisoryStartDate()
+	{
+		return m_custody_or_supervisory_start_date;
+	}
+	
+	public void setSubmittedDateOfBirth(GregorianCalendar cal)
+	{
+		m_submitted_date_of_birth = cal;
+	}
+	
+	public Calendar getSubmittedDateOfBirth()
+	{
+		return m_submitted_date_of_birth;
+	}
+	
+	public void setPhotoType(int value)
+	{
+		m_photo_type = new Integer(value);
+	}
+	
+	public int getPhotoType()
+	{
+		if (m_photo_type == null)
+		{
+			return -1;
+		}
+		return m_photo_type.intValue();
+	}
+
+	public void setEstimatedTimeToComplete(int value)
+	{
+		m_estimated_time_to_complete = new Integer(value);
+	}
+	
+	public int getEstimatedTimeToComplete()
+	{
+		if (m_estimated_time_to_complete == null)
+		{
+			return -1;
+		}
+		return m_estimated_time_to_complete.intValue();
+	}
+
+	public void setNumberOfImagesRequested(int value)
+	{
+		m_number_of_images_requested = new Integer(value);
+	}
+	
+	public int getNumberOfImagesRequested()
+	{
+		if (m_number_of_images_requested == null)
+		{
+			return -1;
+		}
+		return m_number_of_images_requested.intValue();
+	}
+	
+	public void setActionToBeTaken(String value)
+	{
+		m_action_to_be_taken = value;
+	}
+	
+	public String getActionToBeTaken()
+	{
+		return m_action_to_be_taken;
+	}
+	
+	public void setElectronicRapSheet(String value)
+	{
+		m_electronic_rap_sheet = value;
+	}
+	
+	public String getElectronicRapSheet()
+	{
+		return m_electronic_rap_sheet;
+	}
+	
+	public void setPriority(int priority)
+	{
+		m_priority = priority;
+	}
+	
+	public int getPriority()
+	{
+		return m_priority;
+	}
+	
+	public void setPenetrationQueryResponse(int value)
+	{
+		m_penetration_query_response = value;
+	}
+	
+	public int getPenetrationQueryResponse()
+	{
+		return m_penetration_query_response;
+	}
+	
+	public void setNumberOfCandidateImagesReturned(int value)
+	{
+		m_number_of_candidate_image_returned = new Integer(value);
+	}
+	
+	public int getNumberOfCandidateimagesReturned()
+	{
+		if (m_number_of_candidate_image_returned == null)
+		{
+			return -1;
+		}
+		return m_number_of_candidate_image_returned.intValue();
+	}
+	
+	public void setRapBackExpirationDate(GregorianCalendar cal)
+	{
+		m_rap_back_expiration_date = cal;
+	}
+	
+	public Calendar getRapBackExpirationDate()
+	{
+		return m_rap_back_expiration_date;
+	}
+	
+	public void setDnaInCodisFlag(int value)
+	{
+		m_dna_in_codis_flag = new Integer(value);
+	}
+	
+	public int getDnaInCodisFlag()
+	{
+		if (m_dna_in_codis_flag == null)
+		{
+			return -1;
+		}
+		return m_dna_in_codis_flag.intValue();
+	}
+	
+	public void setGeographicCoordinateDateTimeStamp(GregorianCalendar cal)
+	{
+		m_geo_coordinate_date_time_stamp = cal;
+	}
+	
+	public Calendar getGeographicCoordinateDateTimeStamp()
+	{
+		return m_geo_coordinate_date_time_stamp;
+	}
+	
+	public void setGeographicCoordinateLocation(GeographicCoordinateLocation loc)
+	{
+		m_geo_coordinate_location = loc;
+	}
+	
+	public GeographicCoordinateLocation getGeographicCoordinateLocation()
+	{
+		return m_geo_coordinate_location;
+	}
 
 	private String m_fbi_file_number = new String();
 	private ArrayList<String>	m_send_copy_to = new ArrayList<String>();
@@ -1513,27 +2026,27 @@ public class Type2Record extends com.biometricom.nist.itl.biometrics.interchange
 	private ArrayList<String>	m_aliases = new ArrayList<String>();
 	private String	m_place_of_birth = new String();
 	private String	m_country_of_citizenship = new String();
-	private GregorianCalendar	m_date_of_birth = new GregorianCalendar();
-	private int		m_age_range_hi = 0;
-	private int		m_age_range_low = 0;
+	private GregorianCalendar	m_date_of_birth = null;
+	private Integer		m_age_range_hi = null;
+	private Integer		m_age_range_low = null;
 	private String	m_sex = new String();
 	private String	m_race = new String();
 	private ArrayList<String>	m_scars_marks_tattoos = new ArrayList<String>();
 	private int		m_height = 0;
 	private boolean	m_height_is_inches = true;
-	private int		m_height_range_hi = 0;
-	private int		m_height_range_low = 0;
+	private Integer		m_height_range_hi = null;
+	private Integer		m_height_range_low = null;
 	private int		m_weight = 0;
-	private int		m_weight_range_hi = 0;
-	private int		m_weight_range_low = 0;
+	private Integer		m_weight_range_hi = 0;
+	private Integer		m_weight_range_low = 0;
 	private String	m_eye_color = new String();
 	private String	m_hair_color = new String();
 	private String	m_ncic_fingerprint_class = new String();
 	private ArrayList<FingerprintPattern>	m_fingerprint_pattern = new ArrayList<FingerprintPattern>();
-	private boolean	m_is_palm_print_available = false;
-	private boolean	m_is_photo_available = false;
+	private Boolean	m_is_palm_print_available = null;
+	private Boolean	m_is_photo_available = null;
 	private String	m_reason_fingerprinted = new String();
-	private GregorianCalendar	m_date_printed = new GregorianCalendar();
+	private GregorianCalendar	m_date_printed = null;
 	private String	m_employer_address = new String();
 	private String	m_occupation = new String();
 	private String	m_person_fingerprinted_address = new String();
@@ -1543,10 +2056,10 @@ public class Type2Record extends com.biometricom.nist.itl.biometrics.interchange
 	private GregorianCalendar m_date_of_arrest = null;
 	private String	m_date_of_arrest_suffix = new String();
 	private ArrayList<ArrestSegmentLiteral>	m_arrest_info = new ArrayList<ArrestSegmentLiteral>();
-	private boolean	m_is_civil_search_requested = false;
+	private Boolean	m_is_civil_search_requested = null;
 	private String	m_employee_id_number = new String();
 	private ArrayList<CourtSegmentLiteral>	m_court_info = new ArrayList<CourtSegmentLiteral>();
-	private int		m_offense_category = -1;
+	private Integer		m_offense_category = null;
 	private GregorianCalendar m_custody_or_supervisory_start_date = null;
 	private String	m_custody_or_supervisory_status = null;
 	private String	m_identification_comments = null;
@@ -1559,9 +2072,9 @@ public class Type2Record extends com.biometricom.nist.itl.biometrics.interchange
 	private ArrayList<Candidate>	m_candidate_list = new ArrayList<Candidate>();
 	private String	m_repository_statistics_response = new String();
 	private ArrayList<ImageCaptureEquipment>	m_capture_equipment = new ArrayList<ImageCaptureEquipment>();
-	private int	m_image_record_type_desired = -1;
-	private int	m_estimated_time_to_complete = 0;
-	private boolean m_request_for_electronic_rap_sheet = false;
+	private Integer	m_image_record_type_desired = null;
+	private Integer	m_estimated_time_to_complete = null;
+	private Boolean m_request_for_electronic_rap_sheet = null;
 	private String m_action_to_be_taken = null;
 	private ArrayList<String>	m_fingerprints_updated = new ArrayList<String>();
 	private ArrayList<String>	m_controlling_agency_identifier = new ArrayList<String>();
@@ -1569,11 +2082,11 @@ public class Type2Record extends com.biometricom.nist.itl.biometrics.interchange
 	private String m_electronic_rap_sheet = null;
 	private int		m_priority = -1;
 	private int		m_penetration_query_response = -1;
-	private int		m_number_of_candidate_image_returned = 0;
+	private Integer		m_number_of_candidate_image_returned = null;
 	private String	m_response_explanation = null;
 	private String	m_universal_control_number = null;
 	private boolean	m_is_response = false;
-	private boolean m_is_unsolved_latent_file = false;
+	private Boolean m_is_unsolved_latent_file = null;
 	private ArrayList<AmputatedOrBandaged>	m_amputated_or_bandaged = new ArrayList<AmputatedOrBandaged>();
 	private String	m_civil_record_number = null;
 	private ArrayList<Integer>	m_afis_segment_control_number = new ArrayList<Integer>();
@@ -1596,12 +2109,12 @@ public class Type2Record extends com.biometricom.nist.itl.biometrics.interchange
 	private String		m_cascaded_search_flag = null;
 	private GregorianCalendar	m_submitted_date_of_birth = null;
 	private String		m_submitted_name = null;
-	private int			m_photo_type =-1;
+	private Integer			m_photo_type = null;
 	private Integer		m_number_of_images_requested = null;
 	private String		m_rap_back_verification_status = null;
 	private Boolean		m_iris_images_requested = null;
 	private String		m_disposition_maintenance_indicator = null;
-	private Boolean		m_rap_back_elidgibility = null;
+	private Boolean		m_rap_back_eligibility = null;
 	private GregorianCalendar m_rap_back_expiration_date = null;
 	private Boolean		m_dna_flag = null;
 	private String		m_dna_location = null;
@@ -1641,6 +2154,36 @@ public class Type2Record extends com.biometricom.nist.itl.biometrics.interchange
 			m_lon_degree = lon_degree;
 			m_lon_minute = lon_minute;
 			m_lon_second = lon_second;
+		}
+
+		public String getLatitudeDegree()
+		{
+			return m_lat_degree;
+		}
+		
+		public String getLatitudeMinute()
+		{
+			return m_lat_minute;
+		}
+		
+		public String getLatitudeSecond()
+		{
+			return m_lat_second;
+		}
+
+		public String getLongitudeDegree()
+		{
+			return m_lon_degree;
+		}
+		
+		public String getLontitudeMinute()
+		{
+			return m_lon_minute;
+		}
+		
+		public String getLongitudeSecond()
+		{
+			return m_lon_second;
 		}
 
 		private String m_lat_degree = new String();
@@ -1855,7 +2398,7 @@ public class Type2Record extends com.biometricom.nist.itl.biometrics.interchange
 		{
 			return m_date_of_arrest;
 		}
-		
+			
 		public String getOffenseLiteral()
 		{
 			return m_arrest_offense_literal;

@@ -15,6 +15,7 @@
  */
 package com.biometricom.ebts.fbi;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -22,6 +23,7 @@ import java.util.List;
 
 import com.biometricom.nist.itl.biometrics.interchange.Field;
 import com.biometricom.nist.itl.biometrics.interchange.InformationField;
+import com.biometricom.nist.itl.biometrics.interchange.SubField;
 
 /** 
  * 
@@ -37,6 +39,47 @@ import com.biometricom.nist.itl.biometrics.interchange.InformationField;
  */
 public class Type2Record extends com.biometricom.nist.itl.biometrics.interchange.Type2Record
 {
+	public static String SEX_MALE = "M";
+	public static String SEX_FEMALE = "F";
+	public static String SEX_MALE_IMPERSONATOR = "G";
+	public static String SEX_FEMALE_IMPERSONATOR = "N";
+	public static String SEX_NO_GENDER_GIVEN_MALE_NAME = "Y";
+	public static String SEX_NO_GENDER_GIVEN_FEMALE_NAME = "Z";
+	public static String SEX_UNKNOWN_GENDER = "X";
+	
+	public static String RACE_ASIAN = "A";
+	public static String RACE_BLACK = "B";
+	public static String RACE_INDIAN = "I";
+	public static String RACE_WHITE = "W";
+	public static String RACE_UNKNOWN = "U";
+	
+	public static String EYE_COLOR_BLACK = "BLK";
+	public static String EYE_COLOR_BLUE = "BLU";
+	public static String EYE_COLOR_BROWN = "BRO";
+	public static String EYE_COLOR_GRAY = "GRY";
+	public static String EYE_COLOR_GREEN = "GRN";
+	public static String EYE_COLOR_HAZEL = "HAZ";
+	public static String EYE_COLOR_MAROON = "MAR";
+	public static String EYE_COLOR_MULTICOLORED = "MUL";
+	public static String EYE_COLOR_PINK = "PNK";
+	public static String EYE_COLOR_UNKNOWN = "XXX";
+	
+	public static String HAIR_COLOR_BALD = "BAL";
+	public static String HAIR_COLOR_BLACK = "BLK";
+	public static String HAIR_COLOR_BLONDE = "BLN";
+	public static String HAIR_COLOR_BLUE = "BLU";
+	public static String HAIR_COLOR_BROWN = "BRO";
+	public static String HAIR_COLOR_GRAY = "GRY";
+	public static String HAIR_COLOR_GREEN = "GRN";
+	public static String HAIR_COLOR_ORANGE = "ONG";
+	public static String HAIR_COLOR_PINK = "PNK";
+	public static String HAIR_COLOR_PURPLE = "PLE";
+	public static String HAIR_COLOR_RED = "RED";
+	public static String HAIR_COLOR_SANDY = "SDY";
+	public static String HAIR_COLOR_UNKNOWN = "XXX";
+	public static String HAIR_COLOR_WHITE = "WHI";
+	
+	
 	public Type2Record()
 	{
 		super();
@@ -60,167 +103,230 @@ public class Type2Record extends com.biometricom.nist.itl.biometrics.interchange
 		
 			case 4: 
 				f = new Field(getType(), field_no, "Query Depth Detail", "QDD");
-				
+				f.setInformationField(m_query_depth_of_detail);
 				return f;
 
 			case 5: 
 				f = new Field(getType(), field_no, "Retention Code", "RET");
-				
+				f.setInformationField(( m_retention_code ? "Y" : "N"));
 				return f;
 
 			case 6: 
 				f = new Field(getType(), field_no, "Attention Indicator", "ATN");
-				
+				f.setInformationField(m_attention_indicator);
 				return f;
 		
 			case 7: 
 				f = new Field(getType(), field_no, "Send Copy To", "SCO");
-				
+				for (String send_to : m_send_copy_to)
+				{
+					SubField sf = new SubField();
+					sf.addInformationItem(send_to);
+					f.addSubField(sf);
+				}
 				return f;
 
 			case 9: 
 				f = new Field(getType(), field_no, "Originating Agency Case Number", "OCA");
-				
+				f.setInformationField(m_originating_agency_case_number);
 				return f;
 
 			case 10: 
 				f = new Field(getType(), field_no, "Contributor Case Identifier Number", "CIN");
-				
+				for (ContributorCaseIdentifier cci : m_contributor_case_identifier)
+				{
+					SubField sf = new SubField();
+					sf.addInformationItem(cci.getPrefix());
+					sf.addInformationItem(cci.getId());
+					f.addSubField(sf);					
+				}
 				return f;
 		
 			case 11: 
 				f = new Field(getType(), field_no, "Contributor Case Identifier Extension", "CIX");
-				
+				for (Integer cix : m_contributor_case_identifier_extension_list)
+				{
+					SubField sf = new SubField();
+					sf.addInformationItem(cix.toString());
+					f.addSubField(sf);
+				}
 				return f;
 		
 			case 12: 
 				f = new Field(getType(), field_no, "FBI Latent Case Number", "LCN");
-				
+				f.setInformationField(m_fbi_latent_case_number);
 				return f;
 
 			case 13: 
 				f = new Field(getType(), field_no, "Latent Case Number Extension", "LCX");
-				
+				f.setInformationField(m_fbi_latent_case_extension);
 				return f;
 
 			case 14: 
 				f = new Field(getType(), field_no, "FBI Number", "FBI");
+				for (String no : m_fbi_number_list)
+				{
+					SubField sf = new SubField();
+					sf.addInformationItem(no);
+					f.addSubField(sf);
+				}
 				
 				return f;
 		
 			case 15: 
 				f = new Field(getType(), field_no, "State Identification Number", "SID");
-				
+				f.setInformationField(m_state_id_number);
 				return f;
 
 			case 16: 
 				f = new Field(getType(), field_no, "Social Security Number", "SOC");
-				
+				for (String ssn : m_ssn_list)
+				{
+					SubField sf = new SubField();
+					sf.addInformationItem(ssn);
+					f.addSubField(sf);
+				}
 				return f;
 
 			case 17: 
 				f = new Field(getType(), field_no, "Miscellaneous Identification Number", "MNU");
-				
+				for (String value : m_misc_id_number_list)
+				{
+					SubField sf = new SubField();
+					sf.addInformationItem(value);
+					f.addSubField(sf);
+				}
 				return f;
 
 			case 18: 
 				f = new Field(getType(), field_no, "Name", "NAM");
-				
+				f.setInformationField(m_name);
 				return f;
 
 			case 19: 
 				f = new Field(getType(), field_no, "Aliases", "AKA");
-				
+				for (String value : m_alias_list)
+				{
+					SubField sf = new SubField();
+					sf.addInformationItem(value);
+					f.addSubField(sf);
+				}
 				return f;
 		
 			case 20: 
 				f = new Field(getType(), field_no, "Place of Birth", "POB");
-				
+				f.setInformationField(m_place_of_birth);
 				return f;
 
 			case 21: 
 				f = new Field(getType(), field_no, "Country of Citizenship", "CTZ");
-				
+				f.setInformationField(m_country_of_citizenship);
 				return f;
 		
 			case 22: 
 				f = new Field(getType(), field_no, "Date of Birth", "DOB");
-				
+				SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+				f.setInformationField(df.format(m_date_of_birth));
 				return f;
 		
 			case 23: 
 				f = new Field(getType(), field_no, "Age Range", "AGR");
-				
+				f.setInformationField(String.format("%1$02d%2$02d", m_age_range_low, m_age_range_hi));
 				return f;
 		
 			case 24: 
 				f = new Field(getType(), field_no, "Sex", "SEX");
-				
+				f.setInformationField(m_sex);
 				return f;
 
 			case 25: 
 				f = new Field(getType(), field_no, "Race", "RAC");
-				
+				f.setInformationField(m_race);
 				return f;
 
 			case 26: 
 				f = new Field(getType(), field_no, "Scars, Marks and Tattoos", "SMT");
-				
+				for (String value : m_scars_marks_tattoos)
+				{
+					SubField sf = new SubField();
+					sf.addInformationItem(value);
+					f.addSubField(sf);
+				}
 				return f;
 
 			case 27: 
 				f = new Field(getType(), field_no, "Height", "HGT");
-				
+				if (isHeightInches() == true)
+				{
+					f.setInformationField(String.format("N%02d", m_height_in));
+				}
+				else
+				{
+					f.setInformationField(String.format("%d%02d", m_height_ft, m_height_in));
+				}
 				return f;
 
 			case 28: 
 				f = new Field(getType(), field_no, "Height Range", "HTR");
-				
+				if (isHeightRangeInches())
+				{
+					f.setInformationField(String.format("N%02dN02d", m_height_range_low_in.intValue(), m_height_range_hi_in.intValue()));
+				}
+				else
+				{
+					f.setInformationField(String.format("%d%02d%d02d", m_height_range_low_ft.intValue(), m_height_range_low_in.intValue(), m_height_range_hi_ft, m_height_range_hi_in.intValue()));
+				}
 				return f;
 
 			case 29: 
 				f = new Field(getType(), field_no, "Weight", "WGT");
-				
+				f.setInformationField(String.format("%03d", m_weight));
 				return f;
 
 			case 30: 
 				f = new Field(getType(), field_no, "Weight Range", "WTR");
-				
+				f.setInformationField(String.format("%03d%03d", m_weight_range_low, m_weight_range_hi));
 				return f;
 
 			case 31: 
 				f = new Field(getType(), field_no, "Color Eyes", "EYE");
-				
+				f.setInformationField(m_eye_color);
 				return f;
 		
 			case 32: 
 				f = new Field(getType(), field_no, "Hair Color", "HAI");
-				
+				f.setInformationField(m_hair_color);
 				return f;
 
 			case 33: 
 				f = new Field(getType(), field_no, "NCIC Fingerprint Classification", "FPC");
-				
+				f.setInformationField(m_ncic_fingerprint_class);
 				return f;		
 
 			case 34: 
 				f = new Field(getType(), field_no, "Pattern Level Classifications", "PAT");
-				
+				for (FingerprintPattern fpat : m_fingerprint_pattern)
+				{
+					SubField sf = new SubField();
+					sf.addInformationItem(String.format("%02d", fpat.getFingerNumber()));
+					sf.addInformationItem(fpat.getFingerprintPatternCode());
+					f.addSubField(sf);
+				}
 				return f;
 
 			case 35: 
 				f = new Field(getType(), field_no, "Palmprints Available Indicator", "PPA");
-				
+				f.setInformationField(m_is_palm_print_available == true ? "Y" : "N");
 				return f;
 
 			case 36: 
 				f = new Field(getType(), field_no, "Photo Available Indicator", "PHT");
-				
+				f.setInformationField(m_is_photo_available == true ? "Y" : "N");
 				return f;
 
 			case 37: 
 				f = new Field(getType(), field_no, "Reason Fingerprinted", "RFP");
-				
+				f.setInformationField(m_reason_fingerprinted);
 				return f;
 
 			case 38: 
@@ -677,14 +783,19 @@ public class Type2Record extends com.biometricom.nist.itl.biometrics.interchange
 		return m_fbi_latent_case_extension;
 	}
 	
-	public void setFbiNumber(String value)
+	public void addFbiNumber(String value)
 	{
-		m_fbi_number = value;
+		m_fbi_number_list.add(value);
 	}
 	
-	public String getFbiNumber()
+	public void setFbiNumberList(List<String> value)
 	{
-		return m_fbi_number;
+		m_fbi_number_list = new ArrayList<String>(value);
+	}
+	
+	public List<String> getFbiNumber()
+	{
+		return m_fbi_number_list;
 	}
 	
 	public void setStateIdNumber(String value)
@@ -697,14 +808,19 @@ public class Type2Record extends com.biometricom.nist.itl.biometrics.interchange
 		return m_state_id_number;
 	}
 	
-	public void setMiscIdNumber(String value)
+	public void addMiscIdNumber(String value)
 	{
-		m_misc_id_number = value;
+		m_misc_id_number_list.add(value);
 	}
 	
-	public String getMiscIdNumber()
+	public void setMiscIdNumberList(List<String> value)
 	{
-		return m_misc_id_number;
+		m_misc_id_number_list = new ArrayList<String>(value);
+	}
+	
+	public List<String> getMiscIdNumberList()
+	{
+		return m_misc_id_number_list;
 	}
 	
 	public void setName(String value)
@@ -1178,32 +1294,32 @@ public class Type2Record extends com.biometricom.nist.itl.biometrics.interchange
 
 	public void addSocialSecurityNumber(String value)
 	{
-		m_ssn.add(value);
+		m_ssn_list.add(value);
 	}
 	
 	public void setSocialSecurityNumberList(List<String> list)
 	{
-		m_ssn = new ArrayList<String>(list);
+		m_ssn_list = new ArrayList<String>(list);
 	}
 	
 	public List<String> getSocialSecurityNumberList()
 	{
-		return m_ssn;
+		return m_ssn_list;
 	}
 
 	public void addAliases(String value)
 	{
-		m_aliases.add(value);
+		m_alias_list.add(value);
 	}
 	
 	public void setAliasesList(List<String> list)
 	{
-		m_aliases = new ArrayList<String>(list);
+		m_alias_list = new ArrayList<String>(list);
 	}
 	
 	public List<String> getAliasesList()
 	{
-		return m_aliases;
+		return m_alias_list;
 	}
 
 	public void addScarsMarksTattoos(String value)
@@ -1491,6 +1607,21 @@ public class Type2Record extends com.biometricom.nist.itl.biometrics.interchange
 		return m_name_of_designated_repository;
 	}
 
+	public void addContributorCaseIdentiferExtension(Integer value)
+	{
+		m_contributor_case_identifier_extension_list.add(value);
+	}
+	
+	public void setContributorCaseIdentiferExtensionList(List<Integer> list)
+	{
+		m_contributor_case_identifier_extension_list = new ArrayList<Integer>(list);
+	}
+	
+	public List<Integer> getContributorCaseIdentiferExtensionList()
+	{
+		return m_contributor_case_identifier_extension_list;
+	}
+
 	public void addRapBackRecipient(String value)
 	{
 		m_rap_back_recipient.add(value);
@@ -1728,45 +1859,94 @@ public class Type2Record extends com.biometricom.nist.itl.biometrics.interchange
 		return m_date_of_birth;
 	}
 	
-	public void setHeight(int height, boolean is_inches)
+	public void setHeight(int height_ft, int height_in)
 	{
-		m_height = height;
-		m_height_is_inches = is_inches;
+		m_height_ft = height_ft;
+		m_height_in = height_in;
+		m_is_height_inches = false;
 	}
 
+	public void setHeight(int height_in)
+	{
+		m_height_ft = 0;
+		m_height_in = height_in;
+		m_is_height_inches = true;
+	}
+	
+	public int getHeightFeet()
+	{
+		return m_height_ft;
+	}
+	
+	public int getHeightInches()
+	{
+		return m_height_in;
+	}
+	
 	public boolean isHeightInches()
 	{
-		return m_height_is_inches;
+		return m_is_height_inches;
 	}
 	
-	public int getHeight()
+	public void setHeightRange(int low_ft, int low_in, int high_ft, int high_in)
 	{
-		return m_height;
+		m_height_range_low_ft = new Integer(low_ft);
+		m_height_range_low_in = new Integer(low_in);
+		m_height_range_hi_ft  = new Integer(high_ft);
+		m_height_range_hi_in = new Integer(high_in);
+		m_is_height_range_inches = false;
 	}
 	
-	public void setHeightRange(int low, int high)
+	public void setHeightRange(int low_in, int high_in)
 	{
-		m_height_range_low = new Integer(low);
-		m_height_range_hi  = new Integer(high);
+		m_height_range_low_ft = null;
+		m_height_range_low_in = new Integer(low_in);
+		m_height_range_hi_ft  = null;
+		m_height_range_hi_in = new Integer(high_in);
+		m_is_height_range_inches = true;
 	}
-	public int getHeightRangeLow()
+
+	public int getHeightRangeLowFt()
 	{
-		if (m_height_range_low == null)
+		if (m_height_range_low_ft == null)
 		{
 			return 0;
 		}
-		return m_height_range_low.intValue();
+		return m_height_range_low_ft.intValue();
 	}
 
-	public int getHeightRangeHigh()
+	public int getHeightRangeLowIn()
 	{
-		if (m_height_range_hi == null)
+		if (m_height_range_low_in == null)
 		{
 			return 0;
 		}
-		return m_height_range_hi.intValue();
+		return m_height_range_low_in.intValue();
 	}
 
+	public int getHeightRangeHighFt()
+	{
+		if (m_height_range_hi_ft == null)
+		{
+			return 0;
+		}
+		return m_height_range_hi_ft.intValue();
+	}
+
+	public int getHeightRangeHighIn()
+	{
+		if (m_height_range_hi_in == null)
+		{
+			return 0;
+		}
+		return m_height_range_hi_in.intValue();
+	}
+
+	public boolean isHeightRangeInches()
+	{
+		return m_is_height_range_inches;
+	}
+	
 	public void setWeight(int weight)
 	{
 		m_weight = weight;
@@ -2016,14 +2196,15 @@ public class Type2Record extends com.biometricom.nist.itl.biometrics.interchange
 	private String m_attention_indicator = new String();
 	private String m_originating_agency_case_number = new String();
 	private ArrayList<ContributorCaseIdentifier>	m_contributor_case_identifier = new ArrayList<ContributorCaseIdentifier>();
+	private ArrayList<Integer>	m_contributor_case_identifier_extension_list = new ArrayList<Integer>();
 	private String m_fbi_latent_case_number = new String();
 	private String m_fbi_latent_case_extension = new String();
-	private String m_fbi_number = new String();
+	private ArrayList<String> m_fbi_number_list = new ArrayList<String>();
 	private String m_state_id_number = new String();
-	private ArrayList<String> m_ssn = new ArrayList<String>();
-	private String m_misc_id_number = new String();
+	private ArrayList<String> m_ssn_list = new ArrayList<String>();
+	private ArrayList<String> m_misc_id_number_list = new ArrayList<String>();
 	private String m_name = new String();
-	private ArrayList<String>	m_aliases = new ArrayList<String>();
+	private ArrayList<String>	m_alias_list = new ArrayList<String>();
 	private String	m_place_of_birth = new String();
 	private String	m_country_of_citizenship = new String();
 	private GregorianCalendar	m_date_of_birth = null;
@@ -2032,10 +2213,14 @@ public class Type2Record extends com.biometricom.nist.itl.biometrics.interchange
 	private String	m_sex = new String();
 	private String	m_race = new String();
 	private ArrayList<String>	m_scars_marks_tattoos = new ArrayList<String>();
-	private int		m_height = 0;
-	private boolean	m_height_is_inches = true;
-	private Integer		m_height_range_hi = null;
-	private Integer		m_height_range_low = null;
+	private int		m_height_ft = 0;
+	private int		m_height_in = 0;
+	private boolean	m_is_height_inches = true;
+	private Integer		m_height_range_hi_ft = null;
+	private Integer		m_height_range_hi_in = null;
+	private boolean		m_is_height_range_inches = false;
+	private Integer		m_height_range_low_ft = null;
+	private Integer		m_height_range_low_in = null;
 	private int		m_weight = 0;
 	private Integer		m_weight_range_hi = 0;
 	private Integer		m_weight_range_low = 0;

@@ -79,6 +79,12 @@ public class Type2Record extends com.biometricom.nist.itl.biometrics.interchange
 	public static String HAIR_COLOR_UNKNOWN = "XXX";
 	public static String HAIR_COLOR_WHITE = "WHI";
 	
+	public final static String MILITARY_CODE_ARMY = "A"; 
+	public final static String MILITARY_CODE_AIR_FORCE = "F";
+	public final static String MILITARY_CODE_NAVY = "N";
+	public final static String MILITARY_CODE_MARINES = "M";
+	public final static String MILITARY_CODE_COAST_GUARD = "G";
+
 	
 	public Type2Record()
 	{
@@ -331,121 +337,182 @@ public class Type2Record extends com.biometricom.nist.itl.biometrics.interchange
 
 			case 38: 
 				f = new Field(getType(), field_no, "Date Printed", "DPR");
-				
+				df = new SimpleDateFormat("yyyyMMdd");
+				f.setInformationField(df.format(m_date_printed));
 				return f;
 		
 			case 39: 
 				f = new Field(getType(), field_no, "Employer Address", "EAD");
-				
+				f.setInformationField(m_employer_address);
 				return f;
 		
 			case 40: 
 				f = new Field(getType(), field_no, "Occupation", "OCP");
-				
+				f.setInformationField(m_occupation);
 				return f;
 
 			case 41: 
 				f = new Field(getType(), field_no, "Residence of Person Fingerprinted", "RES");
-				
+				f.setInformationField(m_person_fingerprinted_address);
 				return f;
 
 			case 42: 
 				f = new Field(getType(), field_no, "Military Code", "MIL");
-				
+				f.setInformationField(m_military_code);
 				return f;
 
 			case 43: 
 				f = new Field(getType(), field_no, "Type of Search Required", "TSR");
-				
+				f.setInformationField(m_type_of_search_requested);
 				return f;
 
 			case 44: 
 				f = new Field(getType(), field_no, "Geographic Area of Search", "GEO");
-				
+				for (String value : m_geo_area_of_search_list)
+				{
+					SubField sf = new SubField();
+					sf.addInformationItem(value);
+					f.addSubField(sf);
+				}
 				return f;
+				
 			case 45: 
 				f = new Field(getType(), field_no, "Date of Arrest", "DOA");
-				
+				df = new SimpleDateFormat("yyyyMMdd");
+				f.setInformationField(df.format(m_date_of_arrest));
 				return f;
 		
 			case 46: 
 				f = new Field(getType(), field_no, "Date of Arrest - Suffix", "DOS");
-				
+				f.setInformationField(m_date_of_arrest_suffix);
 				return f;
 		
 			case 47: 
 				f = new Field(getType(), field_no, "Arest Segment Literal", "ASL");
-				
+				for (ArrestSegmentLiteral asl : m_arrest_info)
+				{
+					SubField sf = new SubField();
+					if (asl.getDateOfArrest() == null)
+					{
+						sf.addInformationItem("");
+					}
+					else
+					{
+						df = new SimpleDateFormat("yyyyMMdd");
+						f.setInformationField(df.format(asl.getDateOfArrest()));
+					}
+					sf.addInformationItem(asl.getOffenseLiteral());
+					
+					f.addSubField(sf);
+				}
 				return f;
 		
 			case 48: 
 				f = new Field(getType(), field_no, "Civil Search Requested Indicator", "CSR");
-				
+				f.setInformationField(m_is_civil_search_requested.booleanValue() == true ? "Y" : "F");
 				return f;
 		
 			case 49: 
 				f = new Field(getType(), field_no, "Employee Identification Number", "EID");
-				
+				f.setInformationField(m_employee_id_number);
 				return f;
 		
 			case 51: 
 				f = new Field(getType(), field_no, "Court Segment Literal", "CSL");
-				
+				for (CourtSegmentLiteral csl : m_court_info)
+				{
+					SubField sf = new SubField();
+					if (csl.getDispositionDate() == null)
+					{
+						sf.addInformationItem("");
+					}
+					else
+					{
+						df = new SimpleDateFormat("yyyyMMdd");
+						f.setInformationField(df.format(csl.getDispositionDate()));
+					}
+					sf.addInformationItem(csl.getOffenseLiteral());
+					if (csl.getSentencingProvisions() == null)
+					{
+						sf.addInformationItem("");
+					}
+					else
+					{
+						sf.addInformationItem(csl.getSentencingProvisions());
+					}
+					f.addSubField(sf);
+				}
 				return f;
 		
 			case 53: 
 				f = new Field(getType(), field_no, "Offense Category", "OFC");
-				
+				f.setInformationField(m_offense_category.toString());
 				return f;
 
 			case 54: 
 				f = new Field(getType(), field_no, "Custody or Supervisory Status Start Date", "SSD");
-				
+				df = new SimpleDateFormat("yyyyMMdd");
+				f.setInformationField(df.format(m_custody_or_supervisory_start_date));
 				return f;
 
 			case 55: 
-				f = new Field(getType(), field_no, "Custody or Supervisory Literal", "SLE");
-				
+				f = new Field(getType(), field_no, "Custody or Supervisory Status Literal", "SLE");
+				f.setInformationField(m_custody_or_supervisory_status);
 				return f;
 
 			case 56: 
 				f = new Field(getType(), field_no, "Identifiation Comments", "ICO");
-				
+				f.setInformationField(m_identification_comments);
 				return f;
 
 			case 57: 
 				f = new Field(getType(), field_no, "Finger Number(s) Requested", "FNR");
-				
+				for (Integer fn : m_finger_numbers_requested)
+				{
+					SubField sf = new SubField();
+					sf.addInformationItem(String.format("%02d", fn.intValue()));
+					f.addSubField(sf);
+				}
 				return f;
 		
-			case 58: 
-				f = new Field(getType(), field_no, "Image Record Type Desired", "ITD");
+			//case 58: 
+				//f = new Field(getType(), field_no, "Image Record Type Desired", "ITD");
 				
-				return f;
+				//return f;
 
 			case 59: 
 				f = new Field(getType(), field_no, "Search Results Findings", "SRF");
-				
+				f.setInformationField(m_search_results_findings_code);
 				return f;
 
 			case 60: 
 				f = new Field(getType(), field_no, "Status/Error Message", "MSG");
-				
+				for (String msg : m_status_or_error_message)
+				{
+					SubField sf = new SubField();
+					sf.addInformationItem(msg);
+					f.addSubField(sf);
+				}
 				return f;
 
 			case 61: 
 				f = new Field(getType(), field_no, "Case Title", "CST");
-				
+				f.setInformationField(m_case_title);
 				return f;
 		
 			case 62: 
 				f = new Field(getType(), field_no, "Image Type", "IMT");
-				
+				for (Integer itype : m_image_type)
+				{
+					SubField sf = new SubField();
+					sf.addInformationItem(Integer.toString(itype.intValue()));
+					f.addSubField(sf);
+				}
 				return f;
 
 			case 63: 
 				f = new Field(getType(), field_no, "Person Type Designator", "PTD");
-				
+				f.setInformationField(m_person_type_designator);
 				return f;
 
 			case 64: 
@@ -963,14 +1030,19 @@ public class Type2Record extends com.biometricom.nist.itl.biometrics.interchange
 		return m_type_of_search_requested;
 	}
 	
-	public void setGeographicAreaOfSearch(String value)
+	public void addGeographicAreaOfSearch(String value)
 	{
-		m_geo_area_of_search = value;
+		m_geo_area_of_search_list.add(value);
 	}
 	
-	public String getGeographicAreaOfSearch()
+	public void setGeographicAreaOfSearchList(List<String> value)
 	{
-		return m_geo_area_of_search;
+		m_geo_area_of_search_list = new ArrayList<String>(value);
+	}
+	
+	public List<String> getGeographicAreaOfSearch()
+	{
+		return m_geo_area_of_search_list;
 	}
 	
 	public void setDateOfArrestSuffix(String value)
@@ -2237,7 +2309,7 @@ public class Type2Record extends com.biometricom.nist.itl.biometrics.interchange
 	private String	m_person_fingerprinted_address = new String();
 	private String	m_military_code = new String();
 	private String	m_type_of_search_requested = new String();
-	private String	m_geo_area_of_search = new String();
+	private ArrayList<String>	m_geo_area_of_search_list = new ArrayList<String>();
 	private GregorianCalendar m_date_of_arrest = null;
 	private String	m_date_of_arrest_suffix = new String();
 	private ArrayList<ArrestSegmentLiteral>	m_arrest_info = new ArrayList<ArrestSegmentLiteral>();

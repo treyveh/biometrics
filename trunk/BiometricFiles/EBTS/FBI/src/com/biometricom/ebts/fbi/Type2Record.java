@@ -475,10 +475,10 @@ public class Type2Record extends com.biometricom.nist.itl.biometrics.interchange
 				}
 				return f;
 		
-			//case 58: 
-				//f = new Field(getType(), field_no, "Image Record Type Desired", "ITD");
-				
-				//return f;
+			case 58: 
+				f = new Field(getType(), field_no, "Image Record Type Desired", "ITD");
+				f.setInformationField(m_image_record_type_desired.toString());
+				return f;
 
 			case 59: 
 				f = new Field(getType(), field_no, "Search Results Findings", "SRF");
@@ -517,47 +517,81 @@ public class Type2Record extends com.biometricom.nist.itl.biometrics.interchange
 
 			case 64: 
 				f = new Field(getType(), field_no, "Candidate List", "CAN");
-				
+				for (Candidate can : m_candidate_list)
+				{
+					SubField sf = new SubField();
+					sf.addInformationItem(can.getUniversalControlNumber());
+					sf.addInformationItem(can.getName());
+					f.addSubField(sf);
+				}
 				return f;
 		
 			case 65: 
 				f = new Field(getType(), field_no, "Repository Statistics Response", "RSR");
-				
+				f.setInformationField(m_repository_statistics_response);
 				return f;
 
 			case 67: 
 				f = new Field(getType(), field_no, "Image Capture Equipment", "IMA");
-				
+				for (ImageCaptureEquipment icap : m_capture_equipment)
+				{
+					SubField sf = new SubField();
+					sf.addInformationItem(icap.getMake());
+					sf.addInformationItem(icap.getModel());
+					sf.addInformationItem(icap.getSerialNumber());
+					
+					f.addSubField(sf);
+				}
 				return f;
 
 			case 69: 
 				f = new Field(getType(), field_no, "Estimated Time to Complete", "ETC");
-				
+				for (Integer ival : m_estimated_time_to_complete)
+				{
+					SubField sf = new SubField();
+					sf.addInformationItem(ival.toString());
+					f.addSubField(sf);					
+				}
 				return f;
 		
 			case 70: 
 				f = new Field(getType(), field_no, "Request for Electronic Rap Sheet", "RAP");
-				
+				f.setInformationField(m_request_for_electronic_rap_sheet == true ? "Y" : "F");
 				return f;
 
 			case 71: 
 				f = new Field(getType(), field_no, "Action to be Taken", "ACN");
-				
+				f.setInformationField(m_action_to_be_taken);
 				return f;
 		
 			case 72: 
 				f = new Field(getType(), field_no, "Fingerprint Image(s) Updated", "FIU");
-				
+				for (String value : m_fingerprints_updated)
+				{
+					SubField sf = new SubField();
+					sf.addInformationItem(value);
+					f.addSubField(sf);
+				}
 				return f;
 		
 			case 73: 
 				f = new Field(getType(), field_no, "Controlling Agency Identifier", "CRI");
-				
+				for (String value : m_controlling_agency_identifier)
+				{
+					SubField sf = new SubField();
+					sf.addInformationItem(value);
+					f.addSubField(sf);
+				}
 				return f;
 		
 			case 74: 
 				f = new Field(getType(), field_no, "Finger Position", "FGP");
-				
+				for (Integer value : m_finger_position)
+				{
+					SubField sf = new SubField();
+					sf.addInformationItem(String.format("%02d", value.intValue()));
+					f.addSubField(sf);
+				}
 				return f;
 		
 			case 75: 
@@ -2135,18 +2169,19 @@ public class Type2Record extends com.biometricom.nist.itl.biometrics.interchange
 		return m_photo_type.intValue();
 	}
 
-	public void setEstimatedTimeToComplete(int value)
+	public void addEstimatedTimeToComplete(int value)
 	{
-		m_estimated_time_to_complete = new Integer(value);
+		m_estimated_time_to_complete.add(new Integer(value));
 	}
 	
-	public int getEstimatedTimeToComplete()
+	public void setEstimatedTimeToCompleteList(List<Integer> value)
 	{
-		if (m_estimated_time_to_complete == null)
-		{
-			return -1;
-		}
-		return m_estimated_time_to_complete.intValue();
+		m_estimated_time_to_complete = new ArrayList(value);
+	}
+	
+	public List<Integer> getEstimatedTimeToCompleteList()
+	{		
+		return m_estimated_time_to_complete;
 	}
 
 	public void setNumberOfImagesRequested(int value)
@@ -2330,7 +2365,7 @@ public class Type2Record extends com.biometricom.nist.itl.biometrics.interchange
 	private String	m_repository_statistics_response = new String();
 	private ArrayList<ImageCaptureEquipment>	m_capture_equipment = new ArrayList<ImageCaptureEquipment>();
 	private Integer	m_image_record_type_desired = null;
-	private Integer	m_estimated_time_to_complete = null;
+	private ArrayList<Integer>	m_estimated_time_to_complete = new ArrayList<Integer>();
 	private Boolean m_request_for_electronic_rap_sheet = null;
 	private String m_action_to_be_taken = null;
 	private ArrayList<String>	m_fingerprints_updated = new ArrayList<String>();
